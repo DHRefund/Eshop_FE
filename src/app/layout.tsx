@@ -1,9 +1,9 @@
-import { Providers } from "@/components/providers";
+// import { Providers } from "@/components/providers";
 import { Header } from "@/components/header/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { ThemeProvider } from "next-themes";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi" suppressHydrationWarning>
       <head>
-        <script // fix error flicker when reload page
+        {/* <script // fix error flicker when reload page
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -27,15 +27,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               })();
             `,
           }}
-        />
+        /> */}
       </head>
       <body className={inter.className}>
-        <Providers>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
           </div>
-        </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
